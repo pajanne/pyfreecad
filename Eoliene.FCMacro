@@ -1,0 +1,17 @@
+import FreeCAD
+import Draft
+
+data_file = '/Users/jacquespajon/data/airfoil_surface.csv'
+#data_file = '/Users/jacquespajon/data/camber_line.csv'
+#data_file = '/Users/jacquespajon/data/nouveau_fichier_data.csv'
+#data_file = 'C:\le\chemin\airfoil_surface.csv'
+
+coordinates = []
+
+with open(data_file) as input:
+    for line in input:
+        x, y = line.strip().split(',')
+        dot = FreeCAD.Vector(float(x), float(y), 0)
+        coordinates.append(dot)
+
+Draft.makeBSpline(coordinates, closed=True, face=True, support=None)
